@@ -11,14 +11,29 @@
       </div>
       <div class="p-4 w-96">
         <div class="mb-5 flex justify-between">
-          <button class="border rounded px-3 py-1 bg-gray-100" @click="copyToClipboard()">
-            <i class="far fa-copy"></i>
-            <span class="ml-2">Copy</span>
-          </button>
-          <button class="border rounded px-3 py-1 bg-gray-100" @click="copy=''">
-            <i class="far fa-trash-alt"></i>
-            <span class="ml-2">Clear</span>
-          </button>
+          <tool-button label="Copy"
+                       icon="far fa-copy"
+                       eventName="copyToClipboard"
+                       @copyToClipboard="copyToClipboard()"
+          >
+          </tool-button>
+          <tool-button label="Undo"
+                       icon="fas fa-undo"
+                       eventName="undo"
+                       @undo="undo()"
+          >
+          </tool-button>
+          <tool-button label="Redo"
+                       icon="fas fa-redo"
+                       eventName="redo"
+                       @redo="redo()"
+          >
+          </tool-button>
+          <tool-button label="Clear"
+                       icon="far fa-trash-alt"
+                       eventName="clear"
+                       @clear="clear">
+          </tool-button>
         </div>
         <textarea name="name"
                   class="flex w-full h-4/6 border border-gray-300 p-2 rounded focus:border-gray-300 focus:outline-none "
@@ -44,9 +59,10 @@ import CountChars from './CountChars.vue'
 import CountWords from './CountWords.vue'
 import ReadingTime from './ReadingTime.vue'
 import EmojiPicker from './EmojiPicker.vue'
+import ToolButton from './ToolButton.vue'
 
 export default {
-  components: { CountChars, CountWords, ReadingTime, EmojiPicker },
+  components: { CountChars, CountWords, ReadingTime, EmojiPicker, ToolButton },
   data() {
     return {
       copy: '',
@@ -62,6 +78,20 @@ export default {
                   + this.copy.slice(currentPosition, this.copy.length);
 
       this.$refs.textarea.focus()
+    },
+    copyToClipboard() {
+      this.$refs.textarea.select();
+      document.execCommand('copy');
+      window.getSelection().empty();
+    },
+    redo () {
+      document.execCommand('redo');
+    },
+    undo () {
+      document.execCommand('undo');
+    },
+    clear () {
+      this.copy = '';
     }
   }
 }
