@@ -2,14 +2,25 @@
   <nav class="bg-gray-900 text-center py-5 ">
     <h1 class="text-2xl text-white"><i class="fas fa-pen-alt text-xl mr-2"></i>Copy Helper</h1>
   </nav>
-  <div class="container mt-10 mx-auto">
+  <div class="bg-gray-300 py-2 shadow">
+    <div class="container mx-auto text-center">
+      <copy-title :baseTitle="appTitle"></copy-title>
+    </div>
+  </div>
+  <main class="container mt-10 mx-auto">
     <div class="flex flex-row h-screen justify-center">
-      <div class="p-4">
-        <count-chars :copy="copy"></count-chars>
-        <count-words :copy="copy"></count-words>
-        <reading-time :copy="copy"></reading-time>
+      <div class="p-4 w-72">
+        <panel-data label="Characters" icon="fas fa-font">
+          <count-chars :copy="copy"></count-chars>
+        </panel-data>
+        <panel-data label="Words" icon="far fa-file-word">
+          <count-words :copy="copy"></count-words>
+        </panel-data>
+        <panel-data label="Reading time" icon="far fa-clock">
+          <reading-time :copy="copy"></reading-time>
+        </panel-data>
       </div>
-      <div class="p-4 w-96">
+      <div class="p-4 w-96 min-w-96">
         <div class="mb-5 flex justify-between">
           <tool-button label="Copy"
                        icon="far fa-copy"
@@ -43,14 +54,14 @@
         >
         </textarea>
       </div>
-      <div class="p-4 w-72">
+      <aside class="p-4 w-72">
         <emoji-picker :copy="copy"
-                          @insertEmoji="insertEmoji($event)">
+                      @insertEmoji="insertEmoji($event)"
+        >
         </emoji-picker>
-      </div>
+      </aside>
     </div>
-
-  </div>
+  </main>
 </template>
 
 <script>
@@ -60,11 +71,15 @@ import CountWords from './CountWords.vue'
 import ReadingTime from './ReadingTime.vue'
 import EmojiPicker from './EmojiPicker.vue'
 import ToolButton from './ToolButton.vue'
+import CopyTitle from './CopyTitle.vue'
+import PanelData from './PanelData.vue'
 
 export default {
-  components: { CountChars, CountWords, ReadingTime, EmojiPicker, ToolButton },
+  components: { CountChars, CountWords, ReadingTime, EmojiPicker,
+                ToolButton, CopyTitle, PanelData },
   data() {
     return {
+      appTitle: 'Copy Helper',
       copy: '',
       cursorRowPosition: 0,
       cursorColPosition: 0

@@ -1,8 +1,5 @@
 <template>
-  <div class="py-2 px-10 text-gray-700 mt-5">
-    <span class="block w-full mb-2 border-b pb-2">Total words</span>
-    <span class="text-2xl">{{ countWords(copy) }}</span>
-  </div>
+    <span class="text-xl">{{ countWords(copy) }}</span>
 </template>
 
 <script>
