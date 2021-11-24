@@ -44,6 +44,14 @@ export default {
       case 'activity':
         this.emojis = this.json.activity;
         break;
+
+      case 'animals':
+        this.emojis = this.json.animals;
+        break;
+
+      case 'objects':
+        this.emojis = this.json.objects;
+        break;
     }
   },
   methods: {

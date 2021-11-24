@@ -17,12 +17,20 @@
       <li class="ml-2">
         <a href="" @click.prevent="currentSelection=5" :class="[ currentSelection == 5 ? 'border-b-2 border-red-700 pb-1' : null ]">⚽</a>
       </li>
+      <li class="ml-2">
+        <a href="" @click.prevent="currentSelection=6" :class="[ currentSelection == 6 ? 'border-b-2 border-red-700 pb-1' : null ]">🐶</a>
+      </li>
+      <li class="ml-2">
+        <a href="" @click.prevent="currentSelection=7" :class="[ currentSelection == 7 ? 'border-b-2 border-red-700 pb-1' : null ]">📺</a>
+      </li>
     </ul>
     <emoji-set title="Emoticons" type="emoticons" v-if="currentSelection==1"></emoji-set>
     <emoji-set title="Body" type="body" v-if="currentSelection==2"></emoji-set>
     <emoji-set title="Flags" type="flags" v-if="currentSelection==3"></emoji-set>
     <emoji-set title="Food" type="food" v-if="currentSelection==4"></emoji-set>
     <emoji-set title="Activity" type="activity" v-if="currentSelection==5"></emoji-set>
+    <emoji-set title="Animals" type="animals" v-if="currentSelection==6"></emoji-set>
+    <emoji-set title="Objects" type="objects" v-if="currentSelection==7"></emoji-set>
   </div>
 </template>
 
