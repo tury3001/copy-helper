@@ -21,4 +21,14 @@ describe('CountChars.vue Test', () => {
 
     expect(wrapper.text()).toMatch('48');
   })
+
+  it('returns the characters length with emojis', () => {
+    const wrapper = shallowMount(CountChars, {
+      propsData: {
+        copy: 'Texto con un emoji: 🙂. Y dos emojis: 😐'
+      }
+    })
+
+    expect(wrapper.text()).toMatch('40')
+  })
 })
