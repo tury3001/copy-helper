@@ -17,8 +17,10 @@ export default {
       if (this.copy.length == 0)
         return 0;
 
-      return this.copy.trim().split(' ').length;
-
+      return this.copy.trim()
+                       .split(' ')
+                       .filter(word => word !== '')
+                       .length;
     }
   }
 }
