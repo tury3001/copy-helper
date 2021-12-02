@@ -20,7 +20,7 @@
           <reading-time :copy="copy"></reading-time>
         </panel-data>
       </div>
-      <div class="p-4 w-96 min-w-96">
+      <div class="p-4 w-1/3 min-w-96">
         <div class="mb-5 flex justify-between">
           <tool-button label="Copy"
                        icon="far fa-copy"
@@ -59,6 +59,10 @@
                       @insertEmoji="insertEmoji($event)"
         >
         </emoji-picker>
+        <filters :copy="copy"
+                 @uppercased="filterUppercase"
+                 @lowercased="filterLowercase"
+        ></filters>
       </aside>
     </div>
   </main>
@@ -73,10 +77,11 @@ import EmojiPicker from './EmojiPicker.vue'
 import ToolButton from './ToolButton.vue'
 import CopyTitle from './CopyTitle.vue'
 import PanelData from './PanelData.vue'
+import Filters from './Filters.vue'
 
 export default {
   components: { CountChars, CountWords, ReadingTime, EmojiPicker,
-                ToolButton, CopyTitle, PanelData },
+                ToolButton, CopyTitle, PanelData, Filters },
   data() {
     return {
       appTitle: 'Copy Helper',
@@ -107,6 +112,12 @@ export default {
     },
     clear () {
       this.copy = '';
+    },
+    filterUppercase (uppercasedText) {
+      this.copy = uppercasedText
+    },
+    filterLowercase (lowercasedText) {
+      this.copy = lowercasedText
     }
   }
 }
