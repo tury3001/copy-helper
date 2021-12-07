@@ -16,6 +16,9 @@
         <panel-data label="Words" icon="far fa-file-word">
           <count-words :copy="copy"></count-words>
         </panel-data>
+        <panel-data label="Paragraphs" icon="fas fa-align-justify">
+          <count-paragraphs :copy="copy"></count-paragraphs>
+        </panel-data>
         <panel-data label="Reading time" icon="far fa-clock">
           <reading-time :copy="copy"></reading-time>
         </panel-data>
@@ -74,6 +77,7 @@
 
 import CountChars from './CountChars.vue'
 import CountWords from './CountWords.vue'
+import CountParagraphs from './CountParagraphs.vue'
 import ReadingTime from './ReadingTime.vue'
 import EmojiPicker from './EmojiPicker.vue'
 import ToolButton from './ToolButton.vue'
@@ -82,8 +86,8 @@ import PanelData from './PanelData.vue'
 import Filters from './Filters.vue'
 
 export default {
-  components: { CountChars, CountWords, ReadingTime, EmojiPicker,
-                ToolButton, CopyTitle, PanelData, Filters },
+  components: { CountChars, CountWords, CountParagraphs, ReadingTime,
+                EmojiPicker, ToolButton, CopyTitle, PanelData, Filters },
   data() {
     return {
       appTitle: 'Copy Helper',
