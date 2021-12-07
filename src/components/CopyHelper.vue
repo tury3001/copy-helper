@@ -62,6 +62,7 @@
         <filters :copy="copy"
                  @uppercased="filterUppercase"
                  @lowercased="filterLowercase"
+                 @wordcased="filterWordcase"
         ></filters>
       </aside>
     </div>
@@ -118,6 +119,9 @@ export default {
     },
     filterLowercase (lowercasedText) {
       this.copy = lowercasedText
+    },
+    filterWordcase (wordcasedText) {
+      this.copy = wordcasedText
     }
   }
 }

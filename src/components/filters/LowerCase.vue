@@ -9,7 +9,7 @@ export default {
   props: ['text'],
   methods: {
     filter () {
-      this.$emit('uppercased', this.text.toLowerCase())
+      this.$emit('lowercased', this.text.toLowerCase())
     }
   }
 }

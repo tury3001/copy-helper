@@ -7,9 +7,9 @@
     </div>
     <ul v-show="open" class="cursor-pointer">
       <upper-case :text="copy" @uppercased="toUppercase"></upper-case>
-      <lower-case :text="copy" @uppercased="toLowercase"></lower-case>
+      <lower-case :text="copy" @lowercased="toLowercase"></lower-case>
+      <word-case :text="copy" @wordcased="toWordcase"></word-case>
       <li class="py-2 px-4 hover:bg-gray-200">Sentence case</li>
-      <li class="py-2 px-4 hover:bg-gray-200">Word case</li>
     </ul>
   </div>
 </template>
@@ -18,15 +18,18 @@
 
 import UpperCase from './filters/UpperCase.vue'
 import LowerCase from './filters/LowerCase.vue'
+import WordCase from './filters/WordCase.vue'
 
 export default {
   name: 'filters',
-  components: { UpperCase, LowerCase },
+  components: { UpperCase, LowerCase, WordCase },
   props: ['copy'],
   data () {
     return {
       open: false,
-      uppercasedText: ''
+      uppercasedText: '',
+      lowercasedText: '',
+      wordcasedText: ''
     }
   },
   methods: {
@@ -35,6 +38,9 @@ export default {
     },
     toLowercase (lowercasedText) {
       this.$emit('lowercased', lowercasedText);
+    },
+    toWordcase (wordcasedText) {
+      this.$emit('wordcased', wordcasedText)
     }
   }
 }
