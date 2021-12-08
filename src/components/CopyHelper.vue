@@ -22,6 +22,7 @@
         <panel-data label="Reading time" icon="far fa-clock">
           <reading-time :copy="copy"></reading-time>
         </panel-data>
+        <word-density :copy="copy"></word-density>
       </div>
       <div class="p-4 w-1/3 min-w-96">
         <div class="mb-5 flex justify-between">
@@ -84,10 +85,12 @@ import ToolButton from './ToolButton.vue'
 import CopyTitle from './CopyTitle.vue'
 import PanelData from './PanelData.vue'
 import Filters from './Filters.vue'
+import WordDensity from './WordDensity.vue'
 
 export default {
   components: { CountChars, CountWords, CountParagraphs, ReadingTime,
-                EmojiPicker, ToolButton, CopyTitle, PanelData, Filters },
+                EmojiPicker, ToolButton, CopyTitle, PanelData, Filters,
+                WordDensity },
   data() {
     return {
       appTitle: 'Copy Helper',
