@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="border rounded p-2">
     <span class="block w-full mb-2 border-b pb-2">Emojis</span>
     <ul class="mt-2 flex flex-row border-b pb-2">
@@ -36,7 +36,7 @@
 
 <script>
 
-import EmojiSet from './EmojiSet'
+import EmojiSet from './EmojiSet.vue'
 
 export default {
   name: 'emoji-picker',
@@ -51,6 +51,3 @@ export default {
   }
 }
 </script>
-
-<style lang="css" scoped>
-</style>
