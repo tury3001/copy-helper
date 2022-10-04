@@ -1,17 +1,19 @@
-<template>
-  <li class="py-2 px-4 hover:bg-gray-200" @click="filter">Lower case</li>
-</template>
+<script setup>
 
-<script>
+import { defineEmits } from 'vue';
 
-export default {
-  name: 'lower-case',
-  props: ['text'],
-  methods: {
-    filter () {
-      this.$emit('lowercased', this.text.toLowerCase())
-    }
-  }
+const emit = defineEmits(['lowercased']);
+
+const props = defineProps({
+  text: String
+});
+
+function filter () {
+  emit('lowercased', props.text.toLowerCase());
 }
 
 </script>
+
+<template>
+  <li class="py-2 px-4 hover:bg-gray-200" @click="filter">Lower case</li>
+</template>

@@ -1,41 +1,40 @@
-<template>
-  <span class="text-xl">{{ calcReadingTime(copy) }}</span>
-</template>
+<script setup>
 
-<script>
+import { ref, computed } from 'vue';
 
-export default {
-  props: ['copy'],
-  data () {
-    return {
-      wpm: 275 // words per minute -- speed average reader
-    }
-  },
-  methods: {
-    calcReadingTime() {
-      let countWords;
-      let displayOutput;
+const props = defineProps({
+  copy: String
+});
 
-      countWords = this.copy.trim().split(' ').length;
+const wpm = ref(275);
+    
+const readingTime = computed( () => {
+  let countWords;
+  let displayOutput;
 
-      if (this.copy.length == 0)
-        displayOutput = "0 s.";
-      else {
+  countWords = props.copy.trim().split(' ').length;
 
-        let totalSeconds = countWords / this.wpm * 60;
+  if (props.copy.length == 0)
+    displayOutput = "0 s.";
+  else {
 
-        if (totalSeconds < 60) {
-          displayOutput = Math.ceil(totalSeconds) + ' s.';
-        } else {
-          let displayMinutes = Math.trunc(totalSeconds / 60);
-          let displaySeconds = Math.trunc(totalSeconds % 60);
-          displayOutput = displayMinutes + ":" + displaySeconds + ' m.';
-        }
-      }
-      return displayOutput
+    let totalSeconds = countWords / wpm.value * 60;
+
+    if (totalSeconds < 60) {
+      displayOutput = Math.ceil(totalSeconds) + ' s.';
+    } else {
+      let displayMinutes = Math.trunc(totalSeconds / 60);
+      let displaySeconds = Math.trunc(totalSeconds % 60);
+      displayOutput = displayMinutes + ":" + displaySeconds + ' m.';
     }
   }
-}
 
+  return displayOutput;
 
+});
+  
 </script>
+
+<template>
+  <span class="text-xl">{{ readingTime }}</span>
+</template>

@@ -1,16 +1,15 @@
-<template>
-  <span class="text-xl">{{ countParagraphs(copy) }}</span>
-</template>
+<script setup>
 
-<script>
-  export default {
-    name: 'count-paragraphs',
-    props: ['copy'],
-    methods: {
-      countParagraphs () {
+import { computed } from 'vue';
 
-        return this.copy.split('.\n').length - 1
-      }
-    }
-  }
+const props = defineProps({
+  copy: String
+});
+
+const countParagraphs = computed( () => props.copy.split('.\n').length - 1 );
+
 </script>
+
+<template>
+  <span class="text-xl">{{ countParagraphs }}</span>
+</template>

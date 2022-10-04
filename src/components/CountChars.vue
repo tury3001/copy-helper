@@ -1,20 +1,15 @@
-<template>
-    <span class="text-xl">{{ countChars(copy) }}</span>
-</template>
+<script setup>
 
-<script>
-export default {
-  name: 'count-chars',
-  props: ['copy'],
-  data() {
-    return {
+import { computed } from 'vue';
 
-    }
-  },
-  methods: {
-    countChars() {
-        return this.copy.length;
-    }
-  }
-}
+const props = defineProps({
+  copy: String
+});
+
+const countChars = computed(() => props.copy.length);
+
 </script>
+
+<template>
+  <span class="text-xl">{{ countChars }}</span>
+</template>

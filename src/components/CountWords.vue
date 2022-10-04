@@ -1,27 +1,24 @@
-<template>
-    <span class="text-xl">{{ countWords(copy) }}</span>
-</template>
+<script setup>
 
-<script>
-export default {
-  name: 'count-words',
-  props: ['copy'],
-  data() {
-    return {
+import { computed } from 'vue';
 
-    }
-  },
-  methods: {
-    countWords() {
+const props = defineProps({
+  copy: String
+});    
+    
+const countWords = computed( () => {
+  if (props.copy.length === 0)
+    return 0;
 
-      if (this.copy.length == 0)
-        return 0;
-
-      return this.copy.trim()
-                       .split(' ')
-                       .filter(word => word !== '')
-                       .length;
-    }
-  }
-}
+  return props.copy.trim()
+                   .split(' ')
+                   .filter(word => word !== '')
+                   .length;
+})
+    
+  
 </script>
+
+<template>
+    <span class="text-xl">{{ countWords }}</span>
+</template>

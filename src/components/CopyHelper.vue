@@ -1,6 +1,68 @@
+<script setup>
+
+import { ref } from 'vue';
+import CountChars from '@/components/CountChars.vue';
+import CountWords from '@/components/CountWords.vue';
+import CountParagraphs from '@/components/CountParagraphs.vue';
+import ReadingTime from '@/components/ReadingTime.vue';
+import EmojiPicker from '@/components/EmojiPicker.vue';
+import ToolButton from '@/components/ToolButton.vue';
+import CopyTitle from '@/components/CopyTitle.vue';
+import PanelData from '@/components/PanelData.vue';
+import Filters from '@/components/Filters.vue';
+import WordDensity from '@/components/WordDensity.vue';
+
+
+const appTitle = 'Copy Helper';
+const copy = ref('');
+const textarea = ref();
+
+
+function insertEmoji( emoji ) {
+    let currentPosition = textarea.value.selectionStart;
+    copy.value = copy.value.slice(0, currentPosition) + emoji + copy.value.slice(currentPosition, copy.value.length);
+    textarea.value.focus();
+}
+
+function copyToClipboard() {
+    textarea.value.select();
+    document.execCommand('copy');
+    window.getSelection().empty();
+}
+
+function redo () {
+  document.execCommand('redo');
+}
+
+function undo () {
+  document.execCommand('undo');
+}
+
+function clear () {
+  copy.value = '';
+}
+
+function filterUppercase (uppercasedText) {
+  copy.value = uppercasedText;
+}
+
+function filterLowercase (lowercasedText) {
+  copy.value = lowercasedText;
+}
+
+function filterWordcase (wordcasedText) {
+  copy.value = wordcasedText;
+}
+
+function filterSentencecase (sentencecasedText) {
+  copy.value = sentencecasedText;
+}
+
+</script>
+
 <template>
   <nav class="bg-gray-900 text-center py-5 ">
-    <h1 class="text-2xl text-white"><i class="fas fa-pen-alt text-xl mr-2"></i>Copy Helper</h1>
+    <h1 class="text-2xl text-white"><i class="fas fa-pen-alt text-xl mr-2"></i>{{ appTitle }}</h1>
   </nav>
   <div class="bg-gray-300 py-2 shadow">
     <div class="container mx-auto text-center">
@@ -59,81 +121,17 @@
         </textarea>
       </div>
       <aside class="p-4 w-72">
-        <emoji-picker :copy="copy"
-                      @insertEmoji="insertEmoji($event)"
+        <emoji-picker @addEmoji="insertEmoji"
         >
         </emoji-picker>
-        <filters :copy="copy"
-                 @uppercased="filterUppercase"
-                 @lowercased="filterLowercase"
-                 @wordcased="filterWordcase"
-                 @sentencecased="filterSentencecase"
+        <filters
+              :copy="copy"
+              @uppercased="filterUppercase"
+              @lowercased="filterLowercase"
+              @wordcased="filterWordcase"
+              @sentencecased="filterSentencecase"
         ></filters>
       </aside>
     </div>
   </main>
 </template>
-
-<script>
-
-import CountChars from './CountChars.vue'
-import CountWords from './CountWords.vue'
-import CountParagraphs from './CountParagraphs.vue'
-import ReadingTime from './ReadingTime.vue'
-import EmojiPicker from './EmojiPicker.vue'
-import ToolButton from './ToolButton.vue'
-import CopyTitle from './CopyTitle.vue'
-import PanelData from './PanelData.vue'
-import Filters from './Filters.vue'
-import WordDensity from './WordDensity.vue'
-
-export default {
-  components: { CountChars, CountWords, CountParagraphs, ReadingTime,
-                EmojiPicker, ToolButton, CopyTitle, PanelData, Filters,
-                WordDensity },
-  data() {
-    return {
-      appTitle: 'Copy Helper',
-      copy: '',
-      cursorRowPosition: 0,
-      cursorColPosition: 0
-    }
-  },
-  methods: {
-    insertEmoji(event) {
-      let currentPosition = this.$refs.textarea.selectionStart;
-
-      this.copy = this.copy.slice(0, currentPosition) + event.emoji
-                  + this.copy.slice(currentPosition, this.copy.length);
-
-      this.$refs.textarea.focus()
-    },
-    copyToClipboard() {
-      this.$refs.textarea.select();
-      document.execCommand('copy');
-      window.getSelection().empty();
-    },
-    redo () {
-      document.execCommand('redo');
-    },
-    undo () {
-      document.execCommand('undo');
-    },
-    clear () {
-      this.copy = '';
-    },
-    filterUppercase (uppercasedText) {
-      this.copy = uppercasedText
-    },
-    filterLowercase (lowercasedText) {
-      this.copy = lowercasedText
-    },
-    filterWordcase (wordcasedText) {
-      this.copy = wordcasedText
-    },
-    filterSentencecase (sentencecasedText) {
-      this.copy = sentencecasedText
-    }
-  }
-}
-</script>
